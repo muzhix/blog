@@ -1,0 +1,3 @@
+# Cloudflare Pages 重定向。只写明确路径，不要写 /post/* 这类通配。
+# 格式：旧路径    新路径    状态码
+# /old-note    /posts/new-slug/    301

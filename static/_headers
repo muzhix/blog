@@ -1,0 +1,16 @@
+# HTML：缓存 1 小时，过期后回源
+/*
+  Cache-Control: public, max-age=3600, s-maxage=3600, must-revalidate
+
+# 带指纹的静态资源可以缓存一年
+/js/*
+  Cache-Control: public, max-age=31536000, s-maxage=31536000, immutable
+/css/*
+  Cache-Control: public, max-age=31536000, s-maxage=31536000, immutable
+/lib/*
+  Cache-Control: public, max-age=31536000, s-maxage=31536000, immutable
+
+/img/*
+  Cache-Control: public, max-age=604800, s-maxage=604800
+/favicon*
+  Cache-Control: public, max-age=604800, s-maxage=604800

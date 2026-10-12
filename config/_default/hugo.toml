@@ -1,0 +1,73 @@
+# 公开之前把 baseURL 改成你的正式地址，末尾保留斜杠。
+# 本地预览不用改这里，`hugo server` 会临时用 http://localhost:1313/。
+baseURL = "https://example.com/"
+title = "我的博客"
+theme = "blowfish"
+locale = "zh-CN"
+defaultContentLanguage = "zh-cn"
+hasCJKLanguage = true
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+
+[languages]
+  [languages.zh-cn]
+    contentDir = "content"
+    weight = 1
+    copyright = "除非另有声明，本站文章版权归站长所有。"
+    [languages.zh-cn.params]
+      copyright = "© { year } 站长"
+      aiDisclosure = ""
+      copyMarkdownLabel = "复制 Markdown"
+      copyMarkdownDone = "已复制"
+      copyMarkdownError = "复制失败"
+  [languages.en]
+    contentDir = "content.en"
+    weight = 2
+    copyright = "Unless otherwise stated, the site owner holds the rights to these posts."
+    [languages.en.params]
+      copyright = "© { year } Site owner"
+      aiDisclosure = ""
+      copyMarkdownLabel = "Copy Markdown"
+      copyMarkdownDone = "Copied"
+      copyMarkdownError = "Copy failed"
+summaryLength = 42
+enableEmoji = true
+
+[pagination]
+    pagerSize = 9
+    path = "pages"
+
+[author]
+    name = "站长"
+    motto = "我的博客"
+
+[taxonomies]
+    tag = "tags"
+    series = "series"
+    category = "categories"
+
+[mediaTypes]
+  [mediaTypes."text/plain"]
+    suffixes = ["txt"]
+
+[outputFormats]
+  [outputFormats.LLMS]
+    mediaType = "text/plain"
+    baseName = "llms"
+    isPlainText = true
+    notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON", "LLMS"]
+  page = ["HTML", "MARKDOWN"]
+
+[services]
+  [services.rss]
+    limit = 30
+
+[markup]
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+            unsafe = true
+    [markup.highlight]
+        noClasses = false

@@ -1,0 +1,9 @@
+public/
+graphify-out/
+.DS_Store
+config.toml.bak
+.gemini-clipboard/
+x.xlsx
+*.xlsx
+.reasonix/
+.hugo_build.lock

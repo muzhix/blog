@@ -1,0 +1,22 @@
+[[main]]
+  name = "归档"
+  pageRef = "posts"
+  weight = 10
+
+[[main]]
+  name = "标签"
+  pageRef = "tags"
+  weight = 20
+
+# 需要外链图标时按下面这样加一条。pre 是主题图标名，例如 github、rss、x-twitter。
+# [[main]]
+#   identifier = "github"
+#   pre = "github"
+#   url = "https://github.com/your-name"
+#   weight = 30
+
+[[main]]
+  identifier = "rss"
+  pre = "rss"
+  url = "/index.xml"
+  weight = 40

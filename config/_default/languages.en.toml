@@ -1,0 +1,23 @@
+locale = "en"
+label = "English"
+weight = 2
+title = "My Blog"
+
+[params]
+  displayName = "English"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "Jan 2, 2006"
+  logo = "img/blowfish_logo_transparent.png"
+  description = "A bilingual blog built with Hugo and Blowfish."
+
+[params.homepage]
+  showMoreLink = true
+
+[params.author]
+  name = "Site owner"
+  image = "img/blowfish_logo.png"
+  headline = "My Blog"
+  bio = "Replace this name, bio, and the social links with your own."
+  links = [
+  ]
