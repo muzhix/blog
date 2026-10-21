@@ -20,16 +20,6 @@ enableRobotsTXT = true
       copyMarkdownLabel = "复制 Markdown"
       copyMarkdownDone = "已复制"
       copyMarkdownError = "复制失败"
-  [languages.en]
-    contentDir = "content.en"
-    weight = 2
-    copyright = "Unless otherwise stated, the site owner holds the rights to these posts."
-    [languages.en.params]
-      copyright = "© { year } Site owner"
-      aiDisclosure = ""
-      copyMarkdownLabel = "Copy Markdown"
-      copyMarkdownDone = "Copied"
-      copyMarkdownError = "Copy failed"
 summaryLength = 42
 enableEmoji = true
 

@@ -9,7 +9,7 @@ title = "我的博客"
   rtl = false
   dateFormat = "2006-01-02"
   logo = "img/blowfish_logo_transparent.png"
-  description = "用 Hugo 和 Blowfish 写的双语博客。"
+  description = "用 Hugo 和 Blowfish 写的博客。"
 
 [params.author]
   name = "站长"

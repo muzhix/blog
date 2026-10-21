@@ -1,13 +1,12 @@
 # 我的博客
 
-这是一套和 [blog.ferstar.org](https://blog.ferstar.org) 同一路子的 Hugo 站点：主题是 [Blowfish](https://blowfish.page/)（锁定在和原站相同的提交 `51a361e`），中文在网站根路径，英文在 `/en/`。文章页保留搜索、目录、系列、标签、阅读进度、Mermaid、代码复制、复制 Markdown、AI 研读和 RSS。
+这是一套和 [blog.ferstar.org](https://blog.ferstar.org) 同一路子的 Hugo 站点：主题是 [Blowfish](https://blowfish.page/)（锁定在和原站相同的提交 `51a361e`），只有简体中文，放在网站根路径。文章页保留搜索、目录、系列、标签、阅读进度、Mermaid、代码复制、复制 Markdown、AI 研读和 RSS。
 
 原来的文章、配图、幻灯片、旧地址重定向和个人 logo 都已去掉，只留两篇示例。左上角和浏览器图标用的是 Blowfish 自带的鱼标，没有再放自定义图片。
 
 两篇示例可以留着当对照，熟悉之后删掉即可：
 
-- 中文：`content/posts/welcome.md`、`content/posts/write-your-first-post.md`
-- 英文：`content.en/posts/welcome.md`、`content.en/posts/write-your-first-post.md`
+- `content/posts/welcome.md`、`content/posts/write-your-first-post.md`
 
 ## 发布前先改这几处
 
@@ -16,10 +15,10 @@
 | 要改的 | 文件 |
 | --- | --- |
 | 正式网址 | `config/_default/hugo.toml` 的 `baseURL` |
-| 站点名 | 同文件的 `title`，以及 `languages.zh-cn.toml`、`languages.en.toml` 里的 `title` |
-| 站长名字、简介 | 上面两个 language 文件的 `[params.author]` |
-| 页脚版权 | `hugo.toml` 里两种语言的 `copyright` |
-| 导航外链 | `config/_default/menus.zh-cn.toml`、`menus.en.toml` |
+| 站点名 | 同文件的 `title`，以及 `languages.zh-cn.toml` 里的 `title` |
+| 站长名字、简介 | `languages.zh-cn.toml` 的 `[params.author]` |
+| 页脚版权 | `hugo.toml` 里 `copyright` |
+| 导航外链 | `config/_default/menus.zh-cn.toml` |
 | 安装到主屏时的名字 | `static/site.webmanifest` 的 `name` |
 
 `baseURL` 写成 `https://你的域名/`，末尾保留斜杠。本地预览不用改它，`hugo server` 会临时用 `http://localhost:1313/`。
@@ -64,10 +63,8 @@ git submodule update --init --recursive
 hugo server
 ```
 
-- 中文首页：<http://localhost:1313/>
-- 英文首页：<http://localhost:1313/en/>
-- 中文示例：<http://localhost:1313/posts/welcome/>
-- 英文示例：<http://localhost:1313/en/posts/welcome/>
+- 首页：<http://localhost:1313/>
+- 示例文章：<http://localhost:1313/posts/welcome/>
 
 保存 Markdown 后页面会自动刷新。草稿默认不显示，预览草稿用：
 
@@ -85,23 +82,21 @@ hugo --minify
 
 ## 新增文章
 
-一篇文章是一对文件，文件名相同：
+一篇文章就是一个 Markdown 文件：
 
 ```text
 content/posts/my-note.md
-content.en/posts/my-note.md
 ```
 
 用模板生成：
 
 ```bash
 hugo new content/posts/my-note.md
-hugo new content.en/posts/my-note.md
 ```
 
 模板会带上 `draft: true`。写完并预览通过后删掉这一行，或改成 `false`。留着 `draft: true` 再去构建，线上不会有这篇文章。
 
-Front matter 最少要有这些字段。`slug`、`date`、`tags` 两边必须相同；有 `series` 时也必须相同。`title` 和 `description` 按语言写。
+Front matter 最少要有这些字段：
 
 ```yaml
 ---
@@ -118,11 +113,8 @@ series: ['Getting Started']
 
 - `description` 写成「痛点 + 做法 + 结果」，列表页和搜索摘要都用它。
 - `date` 不能是未来时间。Hugo 默认不构建未来日期的文章，页面会悄悄缺失。
-- `slug` 用英文短横线，它决定网址：`/posts/my-note/` 和 `/en/posts/my-note/`。
-- 英文正文第一行写：`> I am not a native English speaker; this article was translated by AI.`
-- 两边的命令、表格、Mermaid 保持同一套内容，不要一边多一边少。
-- 只给中文读者、和英文读者无关的题目可以不译。这种文章不要放进 `content.en/`。
-- 中英文都不要连续空行超过两行。
+- `slug` 用英文短横线，它决定网址：`/posts/my-note/`。
+- 正文不要连续空行超过两行。
 
 示意图用 Blowfish 短代码，不要用 mermaid 代码块。下面整段原样放进文章：
 
@@ -151,9 +143,7 @@ flowchart LR
 ![导出完成后的目录](/images/posts/my-note/export.webp)
 ```
 
-系列名会在文首串成一组内链。相关文章用同一个 `series` 值，中英文写同一个字符串。
-
-右上角的「中 / EN」只在两边都有这篇时出现。缺了英文稿，中文页上就没有切换按钮。
+系列名会在文首串成一组内链。相关文章用同一个 `series` 值。
 
 ## 版本发布
 
@@ -163,7 +153,7 @@ flowchart LR
 
 ```bash
 git status
-git add content/posts/my-note.md content.en/posts/my-note.md
+git add content/posts/my-note.md
 git commit -m "发布：把本地数据库迁到 Apple Container"
 git push origin main
 ```
@@ -180,7 +170,7 @@ git status
 需要留下可回溯的版本时再打标签。标签打在已经推上去、并且线上已经打开看过的那次提交上：
 
 ```bash
-git tag -a v2026.10.11 -m "上线双语骨架和两篇示例"
+git tag -a v2026.10.11 -m "上线站点骨架和两篇示例"
 git push origin v2026.10.11
 ```
 
@@ -337,7 +327,7 @@ static/images/sponsor-alipay.webp
 
 有爱发电再取消 `afdian` 那一行的注释并换成你的地址。文章标题右侧会出现「请我喝咖啡」。
 
-「在 GitHub 上编辑」。把 `article.showEdit` 改成 `true`，`editURL` 写成 `https://github.com/<你>/<仓库>/edit/main/content`。中文稿会落到 `content/...`，英文稿要自己确认路径是否也正确。
+「在 GitHub 上编辑」。把 `article.showEdit` 改成 `true`，`editURL` 写成 `https://github.com/<你>/<仓库>/edit/main/content`，中文稿会落到 `content/...`。
 
 评论。`params.toml` 里 `[comments] showAndTrigger` 仍是 `false`。Blowfish 支持多种评论后端，打开前看 [主题文档](https://blowfish.page/docs/partials/#comments)。`layouts/partials/comments.html` 里留了一个 cf-comment 的例子，填 `serverUrl` 后把对应开关打开。
 
@@ -355,14 +345,13 @@ git fetch origin
 git log HEAD..origin/main --oneline
 ```
 
-确认 Hugo 版本仍在主题 `config.toml` 的 `min` / `max` 之间，再检出新提交，回到仓库根目录预览首页、一篇文章、英文页和标签页。没问题后提交新的子模块指针。
+确认 Hugo 版本仍在主题 `config.toml` 的 `min` / `max` 之间，再检出新提交，回到仓库根目录预览首页、一篇文章和标签页。没问题后提交新的子模块指针。
 
 ## 目录
 
 ```text
-config/_default/     站点配置、导航、两种语言
-content/posts/       中文文章
-content.en/posts/    英文文章
+config/_default/     站点配置、导航
+content/posts/       文章
 archetypes/          hugo new 用的 front matter 模板
 layouts/             盖在 Blowfish 上的模板
 assets/              自定义样式和脚本
