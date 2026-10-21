@@ -10,6 +10,10 @@
 /lib/*
   Cache-Control: public, max-age=31536000, s-maxage=31536000, immutable
 
+# 自托管霞鹜文楷 GB 字体分片（文件名即内容版本），缓存一年
+/fonts/*
+  Cache-Control: public, max-age=31536000, s-maxage=31536000, immutable
+
 /img/*
   Cache-Control: public, max-age=604800, s-maxage=604800
 /favicon*

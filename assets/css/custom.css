@@ -1,3 +1,384 @@
+
+/* --- 霞鹜文楷 GB (LXGW WenKai GB) --- */
+/* 来源: https://github.com/lxgw/LxgwWenKaiGB  许可: SIL OFL 1.1 (见 /fonts/OFFL.txt)
+   按 unicode-range 分片自托管，浏览器只下载页面用到的分片。 */
+
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-cjk-punct.woff2') format('woff2');
+  unicode-range: U+3000-303F,U+FF00-FFEF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-a.woff2') format('woff2');
+  unicode-range: U+4E00-51FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-b.woff2') format('woff2');
+  unicode-range: U+5200-55FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-c.woff2') format('woff2');
+  unicode-range: U+5600-59FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-d.woff2') format('woff2');
+  unicode-range: U+5A00-5FFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-e.woff2') format('woff2');
+  unicode-range: U+6000-63FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-f.woff2') format('woff2');
+  unicode-range: U+6400-67FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-g.woff2') format('woff2');
+  unicode-range: U+6800-6BFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-h.woff2') format('woff2');
+  unicode-range: U+6C00-6FFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-i.woff2') format('woff2');
+  unicode-range: U+7000-73FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-j.woff2') format('woff2');
+  unicode-range: U+7400-77FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-k.woff2') format('woff2');
+  unicode-range: U+7800-7BFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-l.woff2') format('woff2');
+  unicode-range: U+7C00-7FFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-m.woff2') format('woff2');
+  unicode-range: U+8000-83FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-n.woff2') format('woff2');
+  unicode-range: U+8400-87FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-o.woff2') format('woff2');
+  unicode-range: U+8800-8BFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-p.woff2') format('woff2');
+  unicode-range: U+8C00-8FFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-q.woff2') format('woff2');
+  unicode-range: U+9000-93FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-r.woff2') format('woff2');
+  unicode-range: U+9400-97FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-han-s.woff2') format('woff2');
+  unicode-range: U+9800-98FF,U+2E80-2EFF,U+2F00-2FDF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-kana.woff2') format('woff2');
+  unicode-range: U+3041-3096,U+30A1-30FA,U+3105-312F,U+31A0-31BF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-cjk-exta.woff2') format('woff2');
+  unicode-range: U+3400-4DBF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-cjk-punct.woff2') format('woff2');
+  unicode-range: U+3000-303F,U+FF00-FFEF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-a.woff2') format('woff2');
+  unicode-range: U+4E00-51FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-b.woff2') format('woff2');
+  unicode-range: U+5200-55FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-c.woff2') format('woff2');
+  unicode-range: U+5600-59FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-d.woff2') format('woff2');
+  unicode-range: U+5A00-5FFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-e.woff2') format('woff2');
+  unicode-range: U+6000-63FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-f.woff2') format('woff2');
+  unicode-range: U+6400-67FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-g.woff2') format('woff2');
+  unicode-range: U+6800-6BFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-h.woff2') format('woff2');
+  unicode-range: U+6C00-6FFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-i.woff2') format('woff2');
+  unicode-range: U+7000-73FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-j.woff2') format('woff2');
+  unicode-range: U+7400-77FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-k.woff2') format('woff2');
+  unicode-range: U+7800-7BFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-l.woff2') format('woff2');
+  unicode-range: U+7C00-7FFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-m.woff2') format('woff2');
+  unicode-range: U+8000-83FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-n.woff2') format('woff2');
+  unicode-range: U+8400-87FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-o.woff2') format('woff2');
+  unicode-range: U+8800-8BFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-p.woff2') format('woff2');
+  unicode-range: U+8C00-8FFF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-q.woff2') format('woff2');
+  unicode-range: U+9000-93FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-r.woff2') format('woff2');
+  unicode-range: U+9400-97FF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-han-s.woff2') format('woff2');
+  unicode-range: U+9800-98FF,U+2E80-2EFF,U+2F00-2FDF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-kana.woff2') format('woff2');
+  unicode-range: U+3041-3096,U+30A1-30FA,U+3105-312F,U+31A0-31BF;
+}
+@font-face {
+  font-family: 'LXGW WenKai GB';
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  src: url('/fonts/lxgwwenkaigb-medium-cjk-exta.woff2') format('woff2');
+  unicode-range: U+3400-4DBF;
+}
+
+/* 覆盖 Blowfish (Tailwind v4) 全局字体变量：正文文楷，等宽保持系统栈 */
+:root {
+  --font-sans: 'LXGW WenKai GB', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', 'Noto Sans', Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
 /* ==========================================================================
    Blog Custom Styles - Blowfish Theme
    ========================================================================== */
