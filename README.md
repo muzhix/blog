@@ -10,18 +10,17 @@
 
 ## 发布前先改这几处
 
-这些还是占位，公开之前换成你自己的：
+`baseURL`、`CNAME`、部署工作流都已按 <https://blog.hanbd.me/> 配好。还剩这些占位，公开之前换成你自己的：
 
 | 要改的 | 文件 |
 | --- | --- |
-| 正式网址 | `config/_default/hugo.toml` 的 `baseURL` |
-| 站点名 | 同文件的 `title`，以及 `languages.zh-cn.toml` 里的 `title` |
+| 站点名 | `config/_default/hugo.toml` 的 `title`，以及 `languages.zh-cn.toml` 里的 `title` |
 | 站长名字、简介 | `languages.zh-cn.toml` 的 `[params.author]` |
 | 页脚版权 | `hugo.toml` 里 `copyright` |
 | 导航外链 | `config/_default/menus.zh-cn.toml` |
 | 安装到主屏时的名字 | `static/site.webmanifest` 的 `name` |
 
-`baseURL` 写成 `https://你的域名/`，末尾保留斜杠。本地预览不用改它，`hugo server` 会临时用 `http://localhost:1313/`。
+本地预览不用改 `baseURL`，`hugo server` 会临时用 `http://localhost:1313/`。
 
 ## 环境
 
@@ -174,145 +173,46 @@ git tag -a v2026.10.11 -m "上线站点骨架和两篇示例"
 git push origin v2026.10.11
 ```
 
-GitHub 上可以基于这个标签建 Release，把这次改了什么写进说明。回滚时在 Cloudflare Pages 或 GitHub Pages 的部署列表里重新部署上一笔成功的构建，或者 `git revert` 后再推送。不要改已经推送过的标签。
+GitHub 上可以基于这个标签建 Release，把这次改了什么写进说明。回滚时在仓库 Actions 页重跑上一笔成功的部署，或者 `git revert` 后再推送。不要改已经推送过的标签。
 
-推送到 `main` 或打开 Pull Request 时，`.github/workflows/hugo.yml` 会用 Hugo 0.166.0 extended 跑一遍 `hugo --minify`。这只检查能不能构建，不会自动部署。部署在下一节选一家托管。
+推送到 `main` 时，`.github/workflows/pages.yml` 会用 Hugo 0.166.0 extended 跑一遍 `hugo --minify` 并部署到 GitHub Pages；Pull Request 只由 `hugo.yml` 检查能否构建。
 
 ## 把网站公开
 
-构建产物是静态文件，任何能托管静态站的服务都可以。下面两家和这套仓库最合拍。更推荐 Cloudflare Pages：`static/_headers` 的缓存规则和 `static/_redirects` 的跳转只有在 Cloudflare Pages 上生效。
+本站托管在 GitHub Pages，正式地址是 <https://blog.hanbd.me/>。部署由 `.github/workflows/pages.yml` 完成：推送到 `main` 就构建并发布。
 
-### Cloudflare Pages
+先决条件：
 
-1. 把仓库推到 GitHub 或 GitLab。
-2. 打开 [Cloudflare Dashboard](https://dash.cloudflare.com/) → Workers & Pages → Create → Pages → Connect to Git。
-3. 选中这个仓库，生产分支用 `main`。
-4. 构建设置：
-   - Framework preset：Hugo
-   - Build command：`hugo --minify`
-   - Build output directory：`public`
-5. 环境变量：
-   - `HUGO_VERSION` = `0.166.0`
-   - `HUGO_ENV` = `production`
-6. 保存并部署。第一次成功后会得到一个 `*.pages.dev` 地址。
-7. 把 `config/_default/hugo.toml` 的 `baseURL` 改成这个地址或你的正式域名，再推一次。RSS、站点地图和分享卡片都依赖 `baseURL`。
+- 仓库已推到 GitHub（生产分支 `main`），子模块一并推上去。
+- `static/CNAME` 内容只有一行 `blog.hanbd.me`，已在仓库里。这个文件让 GitHub Pages 绑定自定义域名。
+- `config/_default/hugo.toml` 的 `baseURL` 已是 `https://blog.hanbd.me/`。RSS、站点地图和分享卡片都依赖它。
 
-以后每次推送到 `main`，Cloudflare 会重新构建并发布。部署记录里可以预览、也可以回滚到上一版。
+一次性设置：
 
-旧地址要跳到新地址时，在 `static/_redirects` 里一行写一条明确规则，例如：
+1. 仓库 Settings → Pages → Build and deployment → Source 选 **GitHub Actions**。
+2. 仓库 Settings → Pages → Custom domain 填 `blog.hanbd.me`，勾选 **Enforce HTTPS**。证书没签发完之前勾选会失败，过一会儿再试。
+3. 到阿里云 DNS 添加解析记录：
 
-```text
-/notes/old-title    /posts/my-note/    301
-```
-
-不要写 `/post/*` 这种通配。
-
-### GitHub Pages
-
-GitHub Pages 不读取 `_headers` 和 `_redirects`。可以接受这一点的话，在仓库里新增 `.github/workflows/pages.yml`：
-
-```yaml
-name: Deploy GitHub Pages
-
-on:
-  push:
-    branches: [main]
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-      - uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: "0.166.0"
-          extended: true
-      - run: hugo --minify --baseURL "${{ vars.HUGO_BASEURL }}"
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: public
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
-```
-
-然后：
-
-1. 仓库 Settings → Pages → Build and deployment → Source 选 GitHub Actions。
-2. Settings → Secrets and variables → Actions → Variables，新增 `HUGO_BASEURL`。用默认域名时填 `https://<用户名>.github.io/<仓库名>/`；用自定义域名时填 `https://你的域名/`。
-3. 推送到 `main`。Actions 绿了之后，站点在 Settings → Pages 显示的地址上。
-
-项目页（`用户名.github.io/仓库名/`）必须把这个子路径写进 `baseURL`。用户页（仓库名正好是 `用户名.github.io`）的 `baseURL` 是 `https://用户名.github.io/`。
-
-## 使用自己的域名
-
-顺序固定：先让默认域名能打开，再改 DNS，最后把 `baseURL` 换成这个域名并重新部署。证书由托管方签发，一般几分钟到几小时。
-
-选定一个正式地址，全站只用它。例如只用 `https://blog.example.com/`，让裸域 `example.com` 跳过来。`baseURL` 和这个正式地址保持一致，包括 `https` 和末尾斜杠。
-
-### 域名的 DNS 在 Cloudflare
-
-Pages 项目 → Custom domains → Set up a domain，填 `blog.example.com`。域名已经托管在同一个 Cloudflare 账号时，它会自己加上 CNAME。等证书变成 Active，再用浏览器打开。
-
-裸域 `example.com` 同样在 Custom domains 里加一次。Cloudflare 允许在根域写 CNAME，不用再找 A 记录。
-
-两个主机名都加上之后，在 Cloudflare 的 Rules → Redirect Rules 里把非正规地址 301 到 `baseURL` 那一个，避免同一篇文章出现两个网址。
-
-### 域名的 DNS 在别处，网站在 Cloudflare Pages
-
-在 Pages 的 Custom domains 里添加域名后，Cloudflare 会给出要填的 CNAME 目标，一般是 `<项目>.pages.dev`。到域名注册商处添加：
-
-| 主机记录 | 类型 | 目标 |
+| 主机记录 | 记录类型 | 记录值 |
 | --- | --- | --- |
-| `blog` | CNAME | `<项目>.pages.dev` |
+| `blog` | CNAME | `<GitHub用户名>.github.io` |
 
-根域很多注册商不允许 CNAME。那种情况只绑 `blog` 子域，或者把 DNS 服务器改成 Cloudflare 再按上一节做。
+   4. DNS 生效后（本机 `dig blog.hanbd.me` 看 CNAME 是否指向 `<GitHub用户名>.github.io`），推送到 `main` 触发部署。
 
-### 网站在 GitHub Pages
+以后每次推送到 `main`，GitHub Actions 会重新构建并发布。Actions 页可以看每次部署的状态，也能重跑。
 
-1. 仓库 Settings → Pages → Custom domain 填 `blog.example.com`，等它自动写入 `static/CNAME`（内容只有一行域名）。这个文件要提交。
-2. 勾选 Enforce HTTPS。证书没签发完之前勾选会失败，过一会儿再试。
-3. 在 DNS 里添加：
+注意两点：
 
-子域名：
+- GitHub Pages 不读取 `static/_headers` 和 `static/_redirects`，这两份文件在 Pages 上不生效，只作为将来换托管的备份。
+- 域名 `hanbd.me` 已在阿里云 ICP 备案，`blog.hanbd.me` 用 HTTPS 自定义域名没有备案阻碍。GitHub Pages 的节点在境外，大陆访问速度一般但通常可用；若以后追求大陆访问质量，可加国内 CDN（需域名备案，已满足）。
 
-| 主机记录 | 类型 | 目标 |
-| --- | --- | --- |
-| `blog` | CNAME | `<用户名>.github.io` |
+旧地址要跳到新地址时，GitHub Pages 不支持 `_redirects` 规则。用它的 Jekyll 方式：仓库根新建 `static/404.html` 做跳转页，或换用支持重定向规则的托管。
 
-根域用这四条 A 记录，有 IPv6 再加 AAAA：
+## 域名约定
 
-| 类型 | 值 |
-| --- | --- |
-| A | `185.199.108.153` |
-| A | `185.199.109.153` |
-| A | `185.199.110.153` |
-| A | `185.199.111.153` |
-| AAAA | `2606:50c0:8000::153` |
-| AAAA | `2606:50c0:8001::153` |
-| AAAA | `2606:50c0:8002::153` |
-| AAAA | `2606:50c0:8003::153` |
+全站只用 <https://blog.hanbd.me/> 这一个正式地址，`baseURL`、`static/CNAME`、GitHub Pages 的 Custom domain 三处保持一致。裸域 `hanbd.me` 是否跳转、跳到哪里，在阿里云 DNS 里配，不影响本仓库。
 
-4. 把 `HUGO_BASEURL` 和 `hugo.toml` 的 `baseURL` 都改成 `https://blog.example.com/`，推送后再看线上的文章链接是否还带 `github.io`。
-
-DNS 刚改完会有缓存。本机可以用 `dig blog.example.com` 看是否已经指向托管方，再判断是证书还没好，还是记录写错。
+证书由 GitHub Pages 自动签发，Custom domain 页勾选 Enforce HTTPS 即可。DNS 刚改完会有缓存，本机可用 `dig blog.hanbd.me` 看是否已指向 `<GitHub用户名>.github.io`，再判断是证书还没好，还是记录写错。
 
 ## 可以后开的功能
 

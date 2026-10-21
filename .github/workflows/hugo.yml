@@ -1,8 +1,7 @@
 name: Build
 
+# 只检查 Pull Request 能否构建；main 的推送由 pages.yml 构建并部署。
 on:
-  push:
-    branches: [main]
   pull_request:
 
 jobs:

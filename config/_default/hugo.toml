@@ -1,6 +1,6 @@
-# 公开之前把 baseURL 改成你的正式地址，末尾保留斜杠。
+# 正式地址是 blog.hanbd.me，末尾保留斜杠。
 # 本地预览不用改这里，`hugo server` 会临时用 http://localhost:1313/。
-baseURL = "https://example.com/"
+baseURL = "https://blog.hanbd.me/"
 title = "我的博客"
 theme = "blowfish"
 locale = "zh-CN"
