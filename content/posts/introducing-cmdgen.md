@@ -3,30 +3,32 @@ title: "为什么我做了 cmdgen：只生成命令的终端小工具"
 slug: "introducing-cmdgen"
 date: 2026-10-21T16:50:00+08:00
 tags: ['cmdgen', 'CLI', 'Shell', 'AI', 'BYOK', 'Rust']
-description: "想用 Warp 的自然语言命令搜索却卡在付费与 Agent 模式；现成替代又太重。于是做了 BYOK 的 cmdgen：一句话变成当前 Shell 的命令，不自动执行。"
+description: "想用 Warp 做自然语言命令建议，却卡在 Agent 自动切换与付费墙；现成方案又太重。于是做了 BYOK 的 cmdgen：一句话变成当前 Shell 的命令，不自动执行。"
 series: ['Tools']
 ---
 
 想在终端里用自然语言补一条命令，但不要被拽进 Agent 对话，也不想把工作流绑死在某一个终端产品上——这就是我做 [cmdgen](https://github.com/muzhix/cmdgen) 的起点。
 
-## 起因：Warp 的「AI Command Search」用不上
+## 起因：Warp 的命令建议用不上
 
 日常主要还是在 Bash / Zsh 里敲命令。偶尔记不清参数时，希望能用一句话描述意图，得到一条可编辑的建议命令，**仍然停在 terminal 模式**。
 
-我试过 Warp：打开 terminal 后，它很容易把会话切到 Agent；想走「自然语言 → 命令建议」时，又会碰到升级付费墙。后来按文档配了 ChatGPT / BYOK，界面仍提示需要 upgrade——也就是说，我真正想要的那条路径，并没有稳定落在 free / 自带 Key 的可用范围内。
+我试过把 Warp 当主终端，并打算用 Free 档的 Bring your own AI，把已有的 ChatGPT、Cursor、智谱等额度接进去。真实体验却对不上：
 
-那段摸索过程记在[这份对话](https://chatgpt.com/share/6ad8700d-7a18-83ed-ae98-8be29cbc128f)里。结论很简单：与其继续跟产品边界较劲，不如自己做一个**只做一件事**的工具。
+- 开着 terminal 输入时，很容易被自动识别成 Agent（界面会提示进入 agent conversation）
+- 按文档走「自然语言 → 命令建议」（例如 `#`）时，要么被推去切 Agent，要么提示 upgrade / out of credits
+- 接好 ChatGPT plan 之后仍提示 upgrade：那条连接主要给 Warp Agent 用 OpenAI 模型，**覆盖不到**我想要的命令建议
+- Free 里可用的 Next Command 只是根据上下文猜下一条，不是任意自然语言生成
+
+那段摸索过程记在[这份对话](https://chatgpt.com/share/6ad8700d-7a18-83ed-ae98-8be29cbc128f)里。结论很简单：Warp 免费路径撑不起「terminal 里的命令搜索」，与其继续跟产品边界较劲，不如自己做一个**只做一件事**的工具。
 
 ## 现成方案不合适，就自己写
 
-中间也看过几个「自然语言生成 Shell 命令」的实现。多数更偏助手或 Agent：对话、记忆、工具调用、读上下文……能力多了，边界也糊了。我想要的其实很窄：
+中间也看过 ShellGPT、zsh-ai-cmd、Builder.io AI Shell 一类实现。有人建议直接包一层 ShellGPT 就够；但我真正要的只有两块——**生成一条 shell 命令**，以及 **zsh/bash 输入行集成**——聊天、记忆、Agent、工具调用都不想要。功能一多，边界就糊，安装和心智成本也跟着涨。
 
-- 输入一句描述，输出**一条**命令
-- Key 自己带（BYOK），默认可用 DeepSeek，也能接 OpenAI 兼容接口
-- 不自动执行；人看过、改过，再自己按 Enter
-- 尽量不读历史、环境变量、目录文件，请求面要小
+于是决定用更现代的栈重做：Rust 独立 CLI，安装尽量简单；BYOK，默认 DeepSeek，并兼容 OpenAI Chat Completions 接口。工具不绑定 Warp，任意终端都能用。
 
-名字从早期的 cmdask 改成了 **cmdgen**：更直白地表示 generate command。项目一句话描述是：*AI-powered shell command generation for your terminal.*
+名字也改过几轮：先叫 `cmdsg`，中间考虑过 `cmdask`，最后定成 **cmdgen**（Command Generator），项目描述定为：*AI-powered shell command generation for your terminal.*
 
 ## 做出来长什么样
 
